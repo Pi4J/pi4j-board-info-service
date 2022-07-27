@@ -1,2 +1,6 @@
 /.idea/
 /target/
+/node_modules/
+/frontend/generated/
+/package-lock.json
+/webpack.generated.js
