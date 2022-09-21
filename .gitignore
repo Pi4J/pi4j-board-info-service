@@ -4,3 +4,6 @@
 /frontend/generated/
 /package-lock.json
 /webpack.generated.js
+/vite.config.ts
+/vite.generated.ts
+/build_deploy.sh

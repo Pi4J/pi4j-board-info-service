@@ -28,6 +28,13 @@ This service provides the following end-points:
 
 ### Build and distribute with JReleaser
 
+#### Build to deploy to Raspberry Pi server
+
+```bash
+sdk use java 18.0.1-zulu
+mvn package
+```
+
 #### Initial setup
 
 One-time process to prepare a new project for JReleaser
