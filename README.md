@@ -32,8 +32,12 @@ This service provides the following end-points:
 
 ```bash
 sdk use java 18.0.1-zulu
-mvn package
+mvn clean package -Pproduction
 ```
+
+#### Start as a service on Linux
+
+See https://www.baeldung.com/linux/run-java-application-as-service
 
 #### Initial setup
 
