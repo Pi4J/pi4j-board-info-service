@@ -18,13 +18,19 @@ Project website: [pi4j.com](https://pi4j.com/).
 
 This service provides the following end-points:
 
+* Vaadin UI
+    * http://server:port/web
 * OpenAPI/Swagger documentation
     * http://server:port/v3/api-docs
     * http://server:port/swagger-ui/
 * APIs
     * Service
-        * http://localhost:8080/api/service/java
-        * http://localhost:8080/api/service/os
+        * http://server:port/api/service/java
+        * http://server:port/api/service/os
+        * http://server:port/api/service/memory
+    * Raspberry Pi Info
+        * http://server:port/api/raspberrypi/board
+        * http://server:port/api/raspberrypi/board/MODEL
 
 ### Build and distribute with JReleaser
 

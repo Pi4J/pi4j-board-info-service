@@ -53,8 +53,9 @@ public class BaseLayout extends AppLayout {
         AppNav nav = new AppNav();
         nav.addClassNames("app-nav");
 
-        nav.addItem(new AppNavItem("Hello World", HelloWorldView.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Board Information", BoardInfoView.class, "la la-file"));
         nav.addItem(new AppNavItem("System Information", SystemInfoView.class, "la la-file"));
+        //nav.addItem(new AppNavItem("Swagger UI - API", SwaggerView.class, "la la-globe"));
 
         return nav;
     }

@@ -29,4 +29,17 @@ public class SystemInfoService {
     public Map<String, Object> getOsVersion() {
         return osVersion;
     }
+
+    public Map<String, Object> getMemory() {
+        Map<String, Object> memory = new HashMap<>();
+
+        int mb = 1024 * 1024;
+        Runtime instance = Runtime.getRuntime();
+        memory.put("total_mb", (instance.totalMemory() / mb));
+        memory.put("free_mb", (instance.freeMemory() / mb));
+        memory.put("used_mb", ((instance.totalMemory() - instance.freeMemory()) / mb));
+        memory.put("max_mb", (instance.maxMemory() / mb));
+
+        return memory;
+    }
 }

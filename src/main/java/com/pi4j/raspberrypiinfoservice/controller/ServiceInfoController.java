@@ -26,4 +26,9 @@ public class ServiceInfoController {
     public Map<String, Object> getOsVersion() {
         return systemInfoService.getOsVersion();
     }
+
+    @GetMapping("/memory")
+    public Map<String, Object> getMemory() {
+        return systemInfoService.getMemory();
+    }
 }
