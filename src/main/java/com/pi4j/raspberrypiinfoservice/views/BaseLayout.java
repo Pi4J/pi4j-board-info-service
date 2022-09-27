@@ -3,13 +3,11 @@ package com.pi4j.raspberrypiinfoservice.views;
 import com.pi4j.raspberrypiinfoservice.components.appnav.AppNav;
 import com.pi4j.raspberrypiinfoservice.components.appnav.AppNavItem;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.PageTitle;
 
 /**
@@ -40,11 +38,15 @@ public class BaseLayout extends AppLayout {
     }
 
     private Component createDrawerContent() {
-        H2 appName = new H2("My App");
+        var logo = new Image("/logo/pi4j-logo.png", "Pi4J logo");
+        logo.setWidth(150, Unit.PIXELS);
+        logo.getStyle().set("padding", "25px 0 0 50px");
+
+        H2 appName = new H2("Pi4J API");
         appName.addClassNames("app-name");
 
-        com.vaadin.flow.component.html.Section section = new com.vaadin.flow.component.html.Section(appName,
-                createNavigation(), createFooter());
+        com.vaadin.flow.component.html.Section section = new com.vaadin.flow.component.html.Section(logo,
+                appName, createNavigation(), createFooter());
         section.addClassNames("drawer-section");
         return section;
     }
