@@ -20,6 +20,7 @@ This service provides the following end-points:
 
 * Vaadin UI
     * http://server:port/web
+    * Header view only: http://server:port/web/header?name=HEADER_40
 * OpenAPI/Swagger documentation
     * http://server:port/v3/api-docs
     * http://server:port/swagger-ui/
