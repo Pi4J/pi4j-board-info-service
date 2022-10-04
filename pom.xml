@@ -18,7 +18,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <vaadin.version>23.2.2</vaadin.version>
+        <vaadin.version>23.3.0.alpha1</vaadin.version>
     </properties>
 
     <dependencies>
@@ -226,6 +226,15 @@
             <url>https://maven.vaadin.com/vaadin-addons</url>
             <snapshots>
                 <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <!-- Vaadin PreReleases -->
+        <repository>
+            <id>Vaadin PreReleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases/</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>

@@ -1,10 +1,10 @@
 package com.pi4j.raspberrypiinfoservice.views;
 
 import com.pi4j.raspberrypiinfo.definition.BoardModel;
+import com.pi4j.raspberrypiinfoservice.views.header.HeaderLegend;
+import com.pi4j.raspberrypiinfoservice.views.header.HeaderPinView;
 import com.vaadin.flow.component.Unit;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -46,6 +46,10 @@ public class BoardInfoView extends VerticalLayout {
             return lbl;
         }));
 
+        holder.setPadding(true);
+        holder.setMargin(false);
+        holder.setSpacing(true);
+
         var split = new SplitLayout(listBox, holder);
         split.setHeightFull();
         split.setWidthFull();
@@ -61,6 +65,8 @@ public class BoardInfoView extends VerticalLayout {
         var img = new Image("/boards/" + boardModel.name() + ".jpg", boardModel.getLabel());
         img.setHeight(200, Unit.PIXELS);
         holder.add(img);
+
+        holder.add(new H3("Board info"));
 
         holder.add(getLabelValue("Board type", boardModel.getBoardType().name()));
         holder.add(getLabelValue("Released", boardModel.getReleaseDate().getMonth().getDisplayName(TextStyle.FULL, Locale.UK))
@@ -82,6 +88,17 @@ public class BoardInfoView extends VerticalLayout {
                         .collect(Collectors.joining(", "))));
         holder.add(getLabelValue("Remarks", boardModel.getRemarks().isEmpty() ? "" :
                 String.join(", ", boardModel.getRemarks())));
+
+        holder.add(new H3("Header(s)"));
+
+        if (boardModel.getHeaderVersion().getHeaderPins() != null
+                && !boardModel.getHeaderVersion().getHeaderPins().isEmpty()) {
+            boardModel.getHeaderVersion().getHeaderPins().forEach(hp -> {
+                holder.add(new H4(hp.getLabel()));
+                holder.add(new HeaderPinView(hp));
+            });
+            holder.add(new HeaderLegend());
+        }
     }
 
     private HorizontalLayout getLabelValue(String label, String value) {
