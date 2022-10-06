@@ -3,6 +3,8 @@ package com.pi4j.raspberrypiinfoservice.views;
 import com.pi4j.raspberrypiinfo.definition.BoardModel;
 import com.pi4j.raspberrypiinfoservice.views.header.HeaderLegend;
 import com.pi4j.raspberrypiinfoservice.views.header.HeaderPinView;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.listbox.ListBox;
@@ -13,6 +15,8 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.format.TextStyle;
 import java.util.Arrays;
@@ -25,7 +29,10 @@ import java.util.stream.Collectors;
 @RouteAlias(value = "", layout = BaseLayout.class)
 public class BoardInfoView extends VerticalLayout {
 
+    private static final Logger logger = LogManager.getLogger(BoardInfoView.class);
+
     private final VerticalLayout holder = new VerticalLayout();
+    private final ListBox<BoardModel> listBox = new ListBox<>();
 
     public BoardInfoView() {
         setSpacing(false);
@@ -33,10 +40,6 @@ public class BoardInfoView extends VerticalLayout {
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.START);
 
-        ListBox<BoardModel> listBox = new ListBox<>();
-        listBox.setItems(Arrays.stream(BoardModel.values())
-                .sorted(Comparator.comparing(BoardModel::getLabel))
-                .toList());
         listBox.addValueChangeListener(e -> showBoard(e.getValue()));
         listBox.setMinWidth(250, Unit.PIXELS);
         listBox.setHeightFull();
@@ -57,48 +60,64 @@ public class BoardInfoView extends VerticalLayout {
         add(split);
     }
 
+    @Override
+    public void onAttach(AttachEvent event) {
+        UI.getCurrent().access(() -> listBox.setItems(Arrays.stream(BoardModel.values())
+                .sorted(Comparator.comparing(BoardModel::getLabel))
+                .toList()));
+    }
+
     private void showBoard(BoardModel boardModel) {
         holder.removeAll();
 
-        holder.add(new H2(boardModel.getLabel()));
-
-        var img = new Image("/boards/" + boardModel.name() + ".jpg", boardModel.getLabel());
-        img.setHeight(200, Unit.PIXELS);
-        holder.add(img);
-
-        holder.add(new H3("Board info"));
-
-        holder.add(getLabelValue("Board type", boardModel.getBoardType().name()));
-        holder.add(getLabelValue("Released", boardModel.getReleaseDate().getMonth().getDisplayName(TextStyle.FULL, Locale.UK))
-                + " " + boardModel.getReleaseDate().getYear());
-        holder.add(getLabelValue("Model", boardModel.getModel().name()));
-        holder.add(getLabelValue("Header version", boardModel.getHeaderVersion().getLabel()));
-        holder.add(getLabelValue("Release date", boardModel.getReleaseDate().toString()));
-        holder.add(getLabelValue("SOC", boardModel.getSoc().name()
-                + " / " + boardModel.getSoc().getInstructionSet().getLabel()));
-        holder.add(getLabelValue("CPU", boardModel.getNumberOfCpu()
-                + "x " + boardModel.getCpu().getLabel()
-                + " @ " + (boardModel.getVersionsProcessorSpeedInMhz().isEmpty() ? "" :
-                boardModel.getVersionsProcessorSpeedInMhz().stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.joining(", "))) + "Mhz"));
-        holder.add(getLabelValue("Memory in GB", boardModel.getVersionsMemoryInGb().isEmpty() ? "" :
-                boardModel.getVersionsMemoryInGb().stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.joining(", "))));
-        holder.add(getLabelValue("Remarks", boardModel.getRemarks().isEmpty() ? "" :
-                String.join(", ", boardModel.getRemarks())));
-
-        holder.add(new H3("Header(s)"));
-
-        if (boardModel.getHeaderVersion().getHeaderPins() != null
-                && !boardModel.getHeaderVersion().getHeaderPins().isEmpty()) {
-            boardModel.getHeaderVersion().getHeaderPins().forEach(hp -> {
-                holder.add(new H4(hp.getLabel()));
-                holder.add(new HeaderPinView(hp));
-            });
-            holder.add(new HeaderLegend());
+        if (boardModel == null) {
+            return;
         }
+
+        logger.info("Board selected: {}", boardModel.name());
+
+        // Use access to prevent long-running load board on top of the screen
+        UI.getCurrent().access(() -> {
+            holder.add(new H2(boardModel.getLabel()));
+
+            var img = new Image("/boards/" + boardModel.name() + ".jpg", boardModel.getLabel());
+            img.setHeight(200, Unit.PIXELS);
+            holder.add(img);
+
+            holder.add(new H3("Board info"));
+
+            holder.add(getLabelValue("Board type", boardModel.getBoardType().name()));
+            holder.add(getLabelValue("Released", boardModel.getReleaseDate().getMonth().getDisplayName(TextStyle.FULL, Locale.UK))
+                    + " " + boardModel.getReleaseDate().getYear());
+            holder.add(getLabelValue("Model", boardModel.getModel().name()));
+            holder.add(getLabelValue("Header version", boardModel.getHeaderVersion().getLabel()));
+            holder.add(getLabelValue("Release date", boardModel.getReleaseDate().toString()));
+            holder.add(getLabelValue("SOC", boardModel.getSoc().name()
+                    + " / " + boardModel.getSoc().getInstructionSet().getLabel()));
+            holder.add(getLabelValue("CPU", boardModel.getNumberOfCpu()
+                    + "x " + boardModel.getCpu().getLabel()
+                    + " @ " + (boardModel.getVersionsProcessorSpeedInMhz().isEmpty() ? "" :
+                    boardModel.getVersionsProcessorSpeedInMhz().stream()
+                            .map(String::valueOf)
+                            .collect(Collectors.joining(", "))) + "Mhz"));
+            holder.add(getLabelValue("Memory in GB", boardModel.getVersionsMemoryInGb().isEmpty() ? "" :
+                    boardModel.getVersionsMemoryInGb().stream()
+                            .map(String::valueOf)
+                            .collect(Collectors.joining(", "))));
+            holder.add(getLabelValue("Remarks", boardModel.getRemarks().isEmpty() ? "" :
+                    String.join(", ", boardModel.getRemarks())));
+
+            holder.add(new H3("Header(s)"));
+
+            if (boardModel.getHeaderVersion().getHeaderPins() != null
+                    && !boardModel.getHeaderVersion().getHeaderPins().isEmpty()) {
+                boardModel.getHeaderVersion().getHeaderPins().forEach(hp -> {
+                    holder.add(new H4(hp.getLabel()));
+                    holder.add(new HeaderPinView(hp));
+                });
+                holder.add(new HeaderLegend());
+            }
+        });
     }
 
     private HorizontalLayout getLabelValue(String label, String value) {

@@ -1,7 +1,7 @@
 package com.pi4j.raspberrypiinfoservice.controller;
 
 import com.pi4j.raspberrypiinfo.definition.BoardModel;
-import com.pi4j.raspberrypiinfoservice.service.RaspberryPiInfoService;
+import com.pi4j.raspberrypiinfoservice.service.Pi4JInfoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,20 +14,20 @@ import java.util.List;
 @RequestMapping("/api/raspberrypi")
 public class RaspberryPiInfoController {
 
-    private final RaspberryPiInfoService raspberryPiInfoService;
+    private final Pi4JInfoService pi4JInfoService;
 
-    public RaspberryPiInfoController(RaspberryPiInfoService raspberryPiInfoService) {
-        this.raspberryPiInfoService = raspberryPiInfoService;
+    public RaspberryPiInfoController(Pi4JInfoService pi4JInfoService) {
+        this.pi4JInfoService = pi4JInfoService;
     }
 
     @GetMapping("/board")
     public List<BoardModel> getBoards() {
-        return raspberryPiInfoService.getRaspberryPiBoards();
+        return pi4JInfoService.getRaspberryPiBoards();
     }
 
     @GetMapping("/board/{name}")
     public ResponseEntity<BoardModel> getBoardByName(@PathVariable String name) {
-        var board = raspberryPiInfoService.getRaspberryPiBoardByName(name);
+        var board = pi4JInfoService.getRaspberryPiBoardByName(name);
         if (board.isPresent()) {
             return ResponseEntity.ok().body(board.get());
         }

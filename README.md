@@ -57,7 +57,7 @@ One-time process to prepare a new project for JReleaser
 
 ### Adding a feature or solving a problem
 
-If you have and idea to extend and improve this library, please first create a ticket to discuss how
+If you have and idea to extend and improve this project, please first create a ticket to discuss how
 it fits in the project and how it can be implemented.
 
 If you find a bug, create a ticket, so we are aware of it and others with the same problem can

@@ -4,6 +4,8 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -21,8 +23,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @NpmPackage(value = "@vaadin-component-factory/vcf-nav", version = "1.0.6")
 public class RaspberryPiInfoServiceApplication extends SpringBootServletInitializer implements AppShellConfigurator {
 
+    private static final Logger logger = LoggerFactory.getLogger(RaspberryPiInfoServiceApplication.class);
+
     public static void main(String[] args) {
         SpringApplication.run(RaspberryPiInfoServiceApplication.class, args);
+        logger.info("Service is up-and-running");
     }
-
 }

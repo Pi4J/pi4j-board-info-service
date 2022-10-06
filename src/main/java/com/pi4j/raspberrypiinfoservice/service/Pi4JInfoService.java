@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RaspberryPiInfoService {
+public class Pi4JInfoService {
 
     public List<BoardModel> getRaspberryPiBoards() {
         return Arrays.stream(BoardModel.values()).toList();

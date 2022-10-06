@@ -29,6 +29,6 @@ public class ServiceInfoController {
 
     @GetMapping("/memory")
     public Map<String, Object> getMemory() {
-        return systemInfoService.getMemory();
+        return systemInfoService.getJvmMemory();
     }
 }
