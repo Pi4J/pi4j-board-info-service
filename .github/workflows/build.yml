@@ -34,9 +34,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: raspberry-pi-info-service
+      - name: List current
+        run: ls -la
+      - name: List dir
+        run: ls -la raspberry-pi-info-service/
       - name: Upload new JAR to server
-        script:
-          - ls -la
-          - ls -la raspberry-pi-info-service
-          - sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no raspberry-pi-info-service.jar ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }}:${{ secrets.SERVER_LOCATION }}
+        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no raspberry-pi-info-service.jar ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }}:${{ secrets.SERVER_LOCATION }}
 
