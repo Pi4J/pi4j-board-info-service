@@ -26,3 +26,17 @@ jobs:
         with:
           name: raspberry-pi-info-service
           path: target/raspberry-pi-info-service.jar
+
+  deploy:
+    run-on: ubuntu-latest
+    steps:
+      - name: Download the build output
+        uses: actions/download-artifact@v2
+        with:
+          name: raspberry-pi-info-service
+      - name: Upload new JAR to server
+        run:
+          - ls -la
+          - ls -la raspberry-pi-info-service
+          - sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no raspberry-pi-info-service.jar ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }}:${{ secrets.SERVER_LOCATION }}
+
