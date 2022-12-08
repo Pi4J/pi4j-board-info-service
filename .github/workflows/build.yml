@@ -28,7 +28,7 @@ jobs:
           path: target/raspberry-pi-info-service.jar
 
   deploy:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Download the build output
         uses: actions/download-artifact@v2
