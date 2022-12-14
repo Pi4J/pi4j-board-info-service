@@ -1,7 +1,7 @@
-package com.pi4j.raspberrypiinfoservice.views;
+package com.pi4j.boardinfoservice.views;
 
-import com.pi4j.raspberrypiinfoservice.components.appnav.AppNav;
-import com.pi4j.raspberrypiinfoservice.components.appnav.AppNavItem;
+import com.pi4j.boardinfoservice.components.appnav.AppNav;
+import com.pi4j.boardinfoservice.components.appnav.AppNavItem;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;

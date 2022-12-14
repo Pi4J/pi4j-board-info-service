@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice.views.header;
+package com.pi4j.boardinfoservice.views.header;
 
 
 import com.pi4j.raspberrypiinfo.definition.HeaderPins;

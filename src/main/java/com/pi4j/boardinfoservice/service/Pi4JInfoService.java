@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice.service;
+package com.pi4j.boardinfoservice.service;
 
 import com.pi4j.raspberrypiinfo.definition.BoardModel;
 import com.pi4j.raspberrypiinfo.definition.HeaderPins;

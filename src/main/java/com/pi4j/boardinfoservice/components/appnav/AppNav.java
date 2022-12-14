@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice.components.appnav;
+package com.pi4j.boardinfoservice.components.appnav;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasSize;

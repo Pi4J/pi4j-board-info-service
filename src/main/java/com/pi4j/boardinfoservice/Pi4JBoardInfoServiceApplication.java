@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice;
+package com.pi4j.boardinfoservice;
 
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
@@ -21,12 +21,12 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @PWA(name = "My App", shortName = "My App", offlineResources = {})
 @NpmPackage(value = "line-awesome", version = "1.3.0")
 @NpmPackage(value = "@vaadin-component-factory/vcf-nav", version = "1.0.6")
-public class RaspberryPiInfoServiceApplication extends SpringBootServletInitializer implements AppShellConfigurator {
+public class Pi4JBoardInfoServiceApplication extends SpringBootServletInitializer implements AppShellConfigurator {
 
-    private static final Logger logger = LoggerFactory.getLogger(RaspberryPiInfoServiceApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(Pi4JBoardInfoServiceApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(RaspberryPiInfoServiceApplication.class, args);
+        SpringApplication.run(Pi4JBoardInfoServiceApplication.class, args);
         logger.info("Service is up-and-running");
     }
 }

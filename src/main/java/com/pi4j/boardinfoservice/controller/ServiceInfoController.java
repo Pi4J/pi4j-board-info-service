@@ -1,6 +1,6 @@
-package com.pi4j.raspberrypiinfoservice.controller;
+package com.pi4j.boardinfoservice.controller;
 
-import com.pi4j.raspberrypiinfoservice.service.SystemInfoService;
+import com.pi4j.boardinfoservice.service.SystemInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

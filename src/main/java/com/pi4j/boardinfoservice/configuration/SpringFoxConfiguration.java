@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice.configuration;
+package com.pi4j.boardinfoservice.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

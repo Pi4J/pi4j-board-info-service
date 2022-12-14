@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice.util;
+package com.pi4j.boardinfoservice.util;
 
 public class Converter {
 

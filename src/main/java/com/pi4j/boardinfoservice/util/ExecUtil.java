@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice.util;
+package com.pi4j.boardinfoservice.util;
 
 import java.io.*;
 import java.util.concurrent.TimeUnit;

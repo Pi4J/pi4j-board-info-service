@@ -40,7 +40,7 @@
             <AppenderRef ref="console"/>
         </Root>
 
-        <Logger name="com.pi4j.raspberrypiinfoservice" additivity="false" level="info">
+        <Logger name="com.pi4j.boardinfoservice" additivity="false" level="info">
             <AppenderRef ref="fileLogger"/>
             <AppenderRef ref="console"/>
         </Logger>

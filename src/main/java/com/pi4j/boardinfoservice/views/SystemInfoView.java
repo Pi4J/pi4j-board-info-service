@@ -1,6 +1,6 @@
-package com.pi4j.raspberrypiinfoservice.views;
+package com.pi4j.boardinfoservice.views;
 
-import com.pi4j.raspberrypiinfoservice.service.SystemInfoService;
+import com.pi4j.boardinfoservice.service.SystemInfoService;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;

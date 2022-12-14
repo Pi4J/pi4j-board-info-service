@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.pi4j</groupId>
-    <artifactId>raspberry-pi-info-service</artifactId>
+    <artifactId>pi4j-board-info-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>raspberry-pi-info-service</name>
+    <name>Pi4J Board Info Service</name>
     <description>API service providing Raspberry Pi info</description>
 
     <properties>
@@ -125,8 +125,10 @@
     </dependencies>
 
     <build>
-        <finalName>raspberry-pi-info-service</finalName>
+        <finalName>pi4j-board-info-service</finalName>
+
         <defaultGoal>spring-boot:run</defaultGoal>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

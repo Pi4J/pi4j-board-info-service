@@ -1,7 +1,7 @@
-package com.pi4j.raspberrypiinfoservice.views;
+package com.pi4j.boardinfoservice.views;
 
+import com.pi4j.boardinfoservice.views.header.HeaderPinView;
 import com.pi4j.raspberrypiinfo.definition.HeaderPins;
-import com.pi4j.raspberrypiinfoservice.views.header.HeaderPinView;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 

@@ -24,8 +24,8 @@ jobs:
         run: mvn -B package
       - uses: actions/upload-artifact@v3
         with:
-          name: raspberry-pi-info-service
-          path: target/raspberry-pi-info-service.jar
+          name: pi4j-board-info-service
+          path: target/pi4j-board-info-service.jar
 
   deploy:
     runs-on: ubuntu-latest
@@ -33,11 +33,10 @@ jobs:
       - name: Download the build output
         uses: actions/download-artifact@v2
         with:
-          name: raspberry-pi-info-service
+          name: pi4j-board-info-service
       - name: List current
-        run: ls -la
-      - name: List dir
-        run: ls -la raspberry-pi-info-service/
-      - name: Upload new JAR to server
-        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no raspberry-pi-info-service.jar ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }}:${{ secrets.SERVER_LOCATION }}
+        run: |
+          ls -la
+          ls -la pi4j-board-info-service/
+          sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no pi4j-board-info-service.jar ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }}:${{ secrets.SERVER_LOCATION }}
 

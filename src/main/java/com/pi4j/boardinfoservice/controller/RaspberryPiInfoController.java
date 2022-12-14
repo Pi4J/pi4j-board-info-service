@@ -1,7 +1,7 @@
-package com.pi4j.raspberrypiinfoservice.controller;
+package com.pi4j.boardinfoservice.controller;
 
+import com.pi4j.boardinfoservice.service.Pi4JInfoService;
 import com.pi4j.raspberrypiinfo.definition.BoardModel;
-import com.pi4j.raspberrypiinfoservice.service.Pi4JInfoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

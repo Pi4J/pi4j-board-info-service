@@ -1,4 +1,4 @@
-package com.pi4j.raspberrypiinfoservice.controller;
+package com.pi4j.boardinfoservice.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
