@@ -32,8 +32,7 @@ jobs:
     name: Deploy to server
     needs: build
     runs-on: ubuntu-latest
-    only:
-      - main
+    if: github.ref == 'refs/heads/main'
     when: manual
     steps:
       - name: Download the build output
