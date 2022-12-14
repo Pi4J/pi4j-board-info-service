@@ -36,17 +36,23 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Get deployment approval
-        uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ github.TOKEN }}
-          approvers: FDelporte
+      #- name: Get deployment approval
+      #  uses: trstringer/manual-approval@v1
+      #  with:
+      #    secret: ${{ github.TOKEN }}
+      #    approvers: FDelporte
       - name: Download the build output
         uses: actions/download-artifact@v2
         with:
           name: pi4j-board-info-service
-      - name: List current
+      - name: List available packages
         run: |
           ls -la
+      - name: Upload to production server
+        run: |
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no pi4j-board-info-service.jar ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }}:${{ secrets.SERVER_LOCATION }}
+      - name: Restart the service on the production server
+        run: |
+          sshpass -p '${{ secrets.SERVER_PASSWORD }}' ssh -t ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }} 'sudo systemctl restart pi4j_board_info.service'
+
 
