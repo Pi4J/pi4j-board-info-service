@@ -22,6 +22,7 @@
         <!-- Dependencies -->
         <springfox.version>3.0.0</springfox.version>
         <vaadin.version>23.3.0.alpha1</vaadin.version>
+        <pi4j.version>2.2.1</pi4j.version>
     </properties>
 
     <dependencies>
@@ -98,6 +99,21 @@
 
         <!-- Pi4J -->
         <!-- This library is not available yet within Pi4J, so for now including its former version -->
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-core</artifactId>
+            <version>${pi4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-plugin-raspberrypi</artifactId>
+            <version>${pi4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-plugin-pigpio</artifactId>
+            <version>${pi4j.version}</version>
+        </dependency>
         <!--
         <dependency>
             <groupId>be.webtechie</groupId>
