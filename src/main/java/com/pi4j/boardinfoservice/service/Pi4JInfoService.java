@@ -1,7 +1,7 @@
 package com.pi4j.boardinfoservice.service;
 
-import com.pi4j.raspberrypiinfo.definition.BoardModel;
-import com.pi4j.raspberrypiinfo.definition.HeaderPins;
+import com.pi4j.boardinfo.definition.BoardModel;
+import com.pi4j.boardinfo.definition.HeaderPins;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

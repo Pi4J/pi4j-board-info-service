@@ -1,7 +1,7 @@
 package com.pi4j.boardinfoservice.views.header;
 
+import com.pi4j.boardinfo.definition.PinType;
 import com.pi4j.boardinfoservice.util.Converter;
-import com.pi4j.raspberrypiinfo.definition.PinType;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;

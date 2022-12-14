@@ -1,8 +1,8 @@
 package com.pi4j.boardinfoservice.views;
 
+import com.pi4j.boardinfo.definition.BoardModel;
 import com.pi4j.boardinfoservice.views.header.HeaderLegend;
 import com.pi4j.boardinfoservice.views.header.HeaderPinView;
-import com.pi4j.raspberrypiinfo.definition.BoardModel;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
