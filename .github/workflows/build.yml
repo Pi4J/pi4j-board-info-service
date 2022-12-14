@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: Build the Java service JAR
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,7 +29,12 @@ jobs:
           path: target/pi4j-board-info-service.jar
 
   deploy:
+    name: Deploy to server
+    needs: build
     runs-on: ubuntu-latest
+    only:
+      - main
+    when: manual
     steps:
       - name: Download the build output
         uses: actions/download-artifact@v2
