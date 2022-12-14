@@ -28,6 +28,8 @@ jobs:
           name: pi4j-board-info-service
           path: target/pi4j-board-info-service.jar
 
+  # Uses approval as described on
+  # https://trstringer.com/github-actions-manual-approval/
   deploy:
     name: Deploy to server
     needs: build
@@ -46,6 +48,5 @@ jobs:
       - name: List current
         run: |
           ls -la
-          ls -la pi4j-board-info-service/
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no pi4j-board-info-service.jar ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_ADDRESS }}:${{ secrets.SERVER_LOCATION }}
 
