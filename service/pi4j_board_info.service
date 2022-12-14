@@ -1,11 +1,11 @@
 [Unit]
-Description=Raspberry Pi Info Service
+Description=Pi4J Board Info Service
 After=syslog.target network.target
 
 [Service]
 SuccessExitStatus=143
 Type=forking
-ExecStart=bash /home/ubuntu/raspberry-pi-info-service/start_raspberry_pi_info_service.sh &
+ExecStart=bash /home/ubuntu/pi4j-board-info-service/start_pi4j_board_info_service.sh &
 ExecStop=/bin/kill -15 $MAINPID
 Restart=always
 TimeoutSec=3600
