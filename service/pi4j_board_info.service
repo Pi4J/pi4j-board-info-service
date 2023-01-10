@@ -5,7 +5,7 @@ After=syslog.target network.target
 [Service]
 SuccessExitStatus=143
 Type=forking
-ExecStart=bash /home/ubuntu/pi4j-board-info-service/start_pi4j_board_info_service.sh &
+ExecStart=bash /home/frank/pi4j-board-info-service/start_pi4j_board_info_service.sh &
 ExecStop=/bin/kill -15 $MAINPID
 Restart=always
 TimeoutSec=3600

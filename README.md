@@ -16,24 +16,24 @@ Build state:
 
 Project website: [pi4j.com](https://pi4j.com/).
 
-This service provides the following end-points:
+This service provides the following end-points on https://api.pi4j.com:
 
 * Vaadin UI
-    * http://server:port/web
-    * Header view only: http://server:port/web/header?name=HEADER_40
+    * `/web`
+    * Header view only: `/web/header?name=HEADER_40`
 * OpenAPI/Swagger documentation
-    * http://server:port/v3/api-docs
-    * http://server:port/swagger-ui/
+    * `/v3/api-docs`
+    * `/swagger-ui/`
 * APIs
     * Service
-        * http://server:port/api/service/java
-        * http://server:port/api/service/os
-        * http://server:port/api/service/memory
+        * `/api/service/java`
+        * `/api/service/os`
+        * `/api/service/memory`
     * Raspberry Pi Info
-        * http://server:port/api/raspberrypi/board
-        * http://server:port/api/raspberrypi/board/MODEL
+        * `/api/raspberrypi/board`
+        * `/api/raspberrypi/board/MODEL`
 
-### Build and distribute with JReleaser
+### Build and distribute with GitHub Actions
 
 #### Build to deploy to Raspberry Pi server
 
@@ -45,15 +45,6 @@ mvn clean package -Pproduction
 #### Start as a service on Linux
 
 See https://www.baeldung.com/linux/run-java-application-as-service
-
-#### Initial setup
-
-One-time process to prepare a new project for JReleaser
-
-```
-% sdk install jreleaser
-% jreleaser init --format yml
-```
 
 ### Adding a feature or solving a problem
 

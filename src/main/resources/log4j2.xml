@@ -3,7 +3,7 @@
 <Configuration status="warn">
     <Properties>
         <!-- <Property name="basePath">/Users/frankdelporte/tmp/log/</Property> -->
-        <Property name="basePath">/home/ubuntu/pi4j-board-info-service/logs/</Property>
+        <Property name="basePath">/home/frank/pi4j-board-info-service/logs/</Property>
     </Properties>
 
     <Appenders>
