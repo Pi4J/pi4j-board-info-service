@@ -26,12 +26,13 @@ This service provides the following end-points on https://api.pi4j.com:
     * `/swagger-ui/`
 * APIs
     * Service
-        * `/api/service/java`
-        * `/api/service/os`
+        * `/api/service/actual`
+        * `/api/service/board`
         * `/api/service/memory`
     * Raspberry Pi Info
         * `/api/raspberrypi/board`
         * `/api/raspberrypi/board/MODEL`
+            * e.g. `/api/raspberrypi/board/MODEL_4_B`
 
 ### Build and distribute with GitHub Actions
 

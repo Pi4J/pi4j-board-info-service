@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -20,8 +20,9 @@
         <java.version>17</java.version>
 
         <!-- Dependencies -->
+        <pi4j.boardinfo.version>0.2.0</pi4j.boardinfo.version>
         <springfox.version>3.0.0</springfox.version>
-        <vaadin.version>24.0.0.alpha7</vaadin.version>
+        <vaadin.version>24.1.1</vaadin.version>
     </properties>
 
     <dependencies>
@@ -97,22 +98,11 @@
         </dependency>
 
         <!-- Pi4J -->
-        <!--
-        This library is not available yet within the Maven repository,
-        so for now retrieving it via https://jitpack.io
-        -->
-        <dependency>
-            <groupId>com.github.Pi4J</groupId>
-            <artifactId>pi4j-board-info</artifactId>
-            <version>early-access</version>
-        </dependency>
-        <!--
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-board-info</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${pi4j.boardinfo.version}</version>
         </dependency>
-        -->
 
         <!-- Testing -->
         <dependency>
@@ -272,12 +262,6 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-
-        <!-- GitHub PreReleases -->
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 

@@ -1,5 +1,7 @@
 package com.pi4j.boardinfoservice.service;
 
+import com.pi4j.boardinfo.model.DetectedBoard;
+import com.pi4j.boardinfo.util.BoardModelDetection;
 import com.pi4j.boardinfoservice.util.ExecUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,27 +13,15 @@ import java.util.Map;
 @Service
 public class SystemInfoService {
 
-    private final Map<String, Object> javaVersion;
-    private final Map<String, Object> osVersion;
-    Logger logger = LogManager.getLogger(SystemInfoService.class);
+    private final Logger logger = LogManager.getLogger(SystemInfoService.class);
+    private final DetectedBoard detectedBoard;
 
     public SystemInfoService() {
-        javaVersion = new HashMap<>();
-        javaVersion.put("version", System.getProperty("java.version"));
-        javaVersion.put("runtime", System.getProperty("java.runtime.version"));
-
-        osVersion = new HashMap<>();
-        osVersion.put("name", System.getProperty("os.name"));
-        osVersion.put("version", System.getProperty("os.version"));
-        osVersion.put("architecture", System.getProperty("os.arch"));
+        detectedBoard = BoardModelDetection.getDetectedBoard();
     }
 
-    public Map<String, Object> getJavaVersion() {
-        return javaVersion;
-    }
-
-    public Map<String, Object> getOsVersion() {
-        return osVersion;
+    public DetectedBoard getDetectedBoard() {
+        return detectedBoard;
     }
 
     public Map<String, Object> getJvmMemory() {
@@ -47,7 +37,7 @@ public class SystemInfoService {
         return memory;
     }
 
-    public Map<String, Object> getBoardVersion() {
+    public Map<String, Object> getBoardReadings() {
         Map<String, Object> boardVersion = new HashMap<>();
         boardVersion.put("board", getCommandOutput("cat /proc/device-tree/model"));
         // https://raspberry-projects.com/pi/command-line/detect-rpi-hardware-version

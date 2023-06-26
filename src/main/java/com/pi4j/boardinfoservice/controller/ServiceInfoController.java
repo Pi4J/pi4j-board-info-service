@@ -1,5 +1,6 @@
 package com.pi4j.boardinfoservice.controller;
 
+import com.pi4j.boardinfo.model.DetectedBoard;
 import com.pi4j.boardinfoservice.service.SystemInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,18 +18,18 @@ public class ServiceInfoController {
         this.systemInfoService = systemInfoService;
     }
 
-    @GetMapping("/java")
-    public Map<String, Object> getJavaVersion() {
-        return systemInfoService.getJavaVersion();
-    }
-
-    @GetMapping("/os")
-    public Map<String, Object> getOsVersion() {
-        return systemInfoService.getOsVersion();
+    @GetMapping("/board")
+    public DetectedBoard getDetectedBoard() {
+        return systemInfoService.getDetectedBoard();
     }
 
     @GetMapping("/memory")
     public Map<String, Object> getMemory() {
         return systemInfoService.getJvmMemory();
+    }
+
+    @GetMapping("/actual")
+    public Map<String, Object> getBoardReadings() {
+        return systemInfoService.getBoardReadings();
     }
 }

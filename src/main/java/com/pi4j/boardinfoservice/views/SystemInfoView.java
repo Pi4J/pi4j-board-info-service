@@ -41,18 +41,23 @@ public class SystemInfoView extends VerticalLayout {
     @Override
     public void onAttach(AttachEvent event) {
         UI.getCurrent().access(() -> {
-            systemInfoService.getBoardVersion().entrySet().stream()
+            systemInfoService.getBoardReadings().entrySet().stream()
                     .sorted(Map.Entry.comparingByKey())
-                    .forEach(e -> infoList.add(new InfoLine("Board", e.getKey(), e.getValue())));
-            systemInfoService.getOsVersion().entrySet().stream()
-                    .sorted(Map.Entry.comparingByKey())
-                    .forEach(e -> infoList.add(new InfoLine("Operating System", e.getKey(), e.getValue())));
-            systemInfoService.getJavaVersion().entrySet().stream()
-                    .sorted(Map.Entry.comparingByKey())
-                    .forEach(e -> infoList.add(new InfoLine("Java", e.getKey(), e.getValue())));
+                    .forEach(e -> infoList.add(new InfoLine("Board readings", e.getKey(), e.getValue())));
             systemInfoService.getJvmMemory().entrySet().stream()
                     .sorted(Map.Entry.comparingByKey())
                     .forEach(e -> infoList.add(new InfoLine("JVM Memory", e.getKey(), e.getValue())));
+            var board = systemInfoService.getDetectedBoard();
+            infoList.add(new InfoLine("Board", "Name", board.getBoardModel().getName()));
+            infoList.add(new InfoLine("Board", "Type", board.getBoardModel().getBoardType()));
+            infoList.add(new InfoLine("Board", "Model", board.getBoardModel().getModel().getLabel()));
+            infoList.add(new InfoLine("Operating System", "Name", board.getOperatingSystem().getName()));
+            infoList.add(new InfoLine("Operating System", "Architecture", board.getOperatingSystem().getArchitecture()));
+            infoList.add(new InfoLine("Operating System", "Version", board.getOperatingSystem().getVersion()));
+            infoList.add(new InfoLine("Java", "Version", board.getJavaInfo().getVersion()));
+            infoList.add(new InfoLine("Java", "Runtime", board.getJavaInfo().getRuntime()));
+            infoList.add(new InfoLine("Java", "Vendor", board.getJavaInfo().getVendor()));
+            infoList.add(new InfoLine("Java", "Vendor Version", board.getJavaInfo().getVendorVersion()));
         });
     }
 
