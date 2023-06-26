@@ -1,13 +1,14 @@
 package com.pi4j.boardinfoservice.views;
 
-import com.pi4j.boardinfoservice.components.appnav.AppNav;
-import com.pi4j.boardinfoservice.components.appnav.AppNavItem;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 
 /**
@@ -51,14 +52,16 @@ public class BaseLayout extends AppLayout {
         return section;
     }
 
-    private AppNav createNavigation() {
-        AppNav nav = new AppNav();
-        nav.addClassNames("app-nav");
+    private SideNav createNavigation() {
+        SideNav nav = new SideNav();
 
-        nav.addItem(new AppNavItem("Board Information", BoardInfoView.class, "la la-file"));
-        nav.addItem(new AppNavItem("System Information", SystemInfoView.class, "la la-file"));
-        nav.addItem(new AppNavItem("Open API", "/api/docs/pi4j", "la la-globe"));
-        nav.addItem(new AppNavItem("Swagger UI - API", "/swagger-ui/index.html", "la la-globe"));
+        nav.addItem(
+                new SideNavItem("Board Information", BoardInfoView.class, VaadinIcon.DATABASE.create()),
+                new SideNavItem("System Information", SystemInfoView.class, VaadinIcon.INFO.create()),
+                new SideNavItem("Open API", "https://api.pi4j.com/api/docs/pi4j", VaadinIcon.GLOBE.create()),
+                new SideNavItem("Swagger UI - API", "https://api.pi4j.com/swagger-ui/index.html", VaadinIcon.GLOBE.create()),
+                new SideNavItem("Pi4J Docs", "https://pi4j.com", VaadinIcon.GLOBE.create())
+        );
 
         return nav;
     }
