@@ -22,8 +22,8 @@ This service provides the following end-points on https://api.pi4j.com:
     * `/web`
     * Header view only: `/web/header?name=HEADER_40`
 * OpenAPI/Swagger documentation
-    * `/v3/api-docs`
-    * `/swagger-ui/`
+    * `/api/docs/pi4j`
+    * `/swagger-ui/index.html`
 * APIs
     * Service
         * `/api/service/actual`

@@ -57,8 +57,8 @@ public class BaseLayout extends AppLayout {
 
         nav.addItem(new AppNavItem("Board Information", BoardInfoView.class, "la la-file"));
         nav.addItem(new AppNavItem("System Information", SystemInfoView.class, "la la-file"));
-        nav.addItem(new AppNavItem("Open API", "/v3/api-docs", "la la-globe"));
-        nav.addItem(new AppNavItem("Swagger UI - API", "/swagger-ui/", "la la-globe"));
+        nav.addItem(new AppNavItem("Open API", "/api/docs/pi4j", "la la-globe"));
+        nav.addItem(new AppNavItem("Swagger UI - API", "/swagger-ui/index.html", "la la-globe"));
 
         return nav;
     }
