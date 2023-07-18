@@ -11,7 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class RedirectController {
 
     @GetMapping("/web")
-    public ModelAndView redirectWithUsingRedirectView(ModelMap model) {
+    public ModelAndView redirectWeb(ModelMap model) {
+        return new ModelAndView("redirect:/", model);
+    }
+
+    @GetMapping("/web/")
+    public ModelAndView redirectWebDirectory(ModelMap model) {
         return new ModelAndView("redirect:/", model);
     }
 }
