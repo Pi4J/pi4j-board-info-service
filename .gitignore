@@ -6,6 +6,5 @@
 /webpack.generated.js
 /vite.config.ts
 /vite.generated.ts
-/build_deploy.sh
 /SERVER_INSTALL.md
 /src/main/dev-bundle/
