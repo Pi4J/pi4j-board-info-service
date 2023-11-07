@@ -62,9 +62,11 @@ public class BoardInfoView extends VerticalLayout {
 
     @Override
     public void onAttach(AttachEvent event) {
-        UI.getCurrent().access(() -> listBox.setItems(Arrays.stream(BoardModel.values())
+        var listWithoutUnknown = Arrays.stream(BoardModel.values())
+                .filter(bm -> bm != BoardModel.UNKNOWN)
                 .sorted(Comparator.comparing(BoardModel::getLabel))
-                .toList()));
+                .toList();
+        UI.getCurrent().access(() -> listBox.setItems(listWithoutUnknown));
     }
 
     private void showBoard(BoardModel boardModel) {
