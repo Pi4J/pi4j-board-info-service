@@ -84,7 +84,10 @@ public class BoardInfoView extends VerticalLayout {
 
             var img = new Image("/boards/" + boardModel.name() + ".jpg", boardModel.getLabel());
             img.setHeight(200, Unit.PIXELS);
+            img.setMaxHeight(350, Unit.PIXELS);
             holder.add(img);
+
+            holder.add(new Paragraph("Pictures only as illustration, still searching for a complete list of good pictures..."));
 
             holder.add(new H3("Board info"));
 
