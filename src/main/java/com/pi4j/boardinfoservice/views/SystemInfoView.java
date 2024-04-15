@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @PageTitle("System Information")
 @Route(value = "system-information", layout = BaseLayout.class)
@@ -29,12 +28,17 @@ public class SystemInfoView extends VerticalLayout {
         Grid<InfoLine> grid = new Grid<>(InfoLine.class, false);
         grid.addColumn(InfoLine::type)
                 .setHeader("Type")
+                .setWidth("200px")
+                .setFlexGrow(0)
                 .setTextAlign(ColumnTextAlign.START);
         grid.addColumn(InfoLine::label)
                 .setHeader("Label")
+                .setWidth("200px")
+                .setFlexGrow(0)
                 .setTextAlign(ColumnTextAlign.START);
         grid.addColumn(InfoLine::info)
                 .setHeader("Info")
+                .setFlexGrow(1)
                 .setTextAlign(ColumnTextAlign.START);
         grid.setItems(infoList);
         add(grid);
@@ -54,7 +58,7 @@ public class SystemInfoView extends VerticalLayout {
             infoList.add(new InfoLine("Board", "Model", board.getBoardModel().getModel().getLabel()));
             infoList.add(new InfoLine("Board", "SOC", board.getBoardModel().getSoc()));
             infoList.add(new InfoLine("Board", "CPU", board.getBoardModel().getCpu()));
-            infoList.add(new InfoLine("Board", "Codes", board.getBoardModel().getBoardCodes().stream().collect(Collectors.joining(", "))));
+            infoList.add(new InfoLine("Board", "Codes", String.join(", ", board.getBoardModel().getBoardCodes())));
             infoList.add(new InfoLine("Operating System", "Name", board.getOperatingSystem().getName()));
             infoList.add(new InfoLine("Operating System", "Architecture", board.getOperatingSystem().getArchitecture()));
             infoList.add(new InfoLine("Operating System", "Version", board.getOperatingSystem().getVersion()));
