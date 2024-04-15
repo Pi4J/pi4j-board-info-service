@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @PageTitle("System Information")
 @Route(value = "system-information", layout = BaseLayout.class)
@@ -49,8 +50,11 @@ public class SystemInfoView extends VerticalLayout {
         UI.getCurrent().access(() -> {
             var board = systemInfoService.getDetectedBoard();
             infoList.add(new InfoLine("Board", "Name", board.getBoardModel().getName()));
-            infoList.add(new InfoLine("Board", "Type", board.getBoardModel().getBoardType()));
+            infoList.add(new InfoLine("Board", "Description", board.getBoardModel().getLabel()));
             infoList.add(new InfoLine("Board", "Model", board.getBoardModel().getModel().getLabel()));
+            infoList.add(new InfoLine("Board", "SOC", board.getBoardModel().getSoc()));
+            infoList.add(new InfoLine("Board", "CPU", board.getBoardModel().getCpu()));
+            infoList.add(new InfoLine("Board", "Codes", board.getBoardModel().getBoardCodes().stream().collect(Collectors.joining(", "))));
             infoList.add(new InfoLine("Operating System", "Name", board.getOperatingSystem().getName()));
             infoList.add(new InfoLine("Operating System", "Architecture", board.getOperatingSystem().getArchitecture()));
             infoList.add(new InfoLine("Operating System", "Version", board.getOperatingSystem().getVersion()));
