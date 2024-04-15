@@ -3,7 +3,7 @@ package com.pi4j.boardinfoservice.views.header;
 import com.pi4j.boardinfo.definition.PinType;
 import com.pi4j.boardinfoservice.util.Converter;
 import com.vaadin.flow.component.Unit;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -30,7 +30,7 @@ class PinTypeView extends HorizontalLayout {
         color.getStyle().set("background-color", Converter.intToHexColor(pinType.getColor()));
         this.add(color);
 
-        var name = new Label(pinType.getLabel());
+        var name = new Span(pinType.getLabel());
         name.getStyle().set("font", "18px Tahoma")
                 .set("font-weight", "bold");
         this.add(name);

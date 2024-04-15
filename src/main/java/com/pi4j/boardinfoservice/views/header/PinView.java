@@ -1,9 +1,9 @@
 package com.pi4j.boardinfoservice.views.header;
 
-import com.pi4j.boardinfo.pin.HeaderPin;
+import com.pi4j.boardinfo.model.HeaderPin;
 import com.pi4j.boardinfoservice.util.Converter;
 import com.vaadin.flow.component.Unit;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -33,13 +33,13 @@ class PinView extends HorizontalLayout {
         bcmHolder.setMargin(false);
         bcmHolder.setSpacing(false);
 
-        var bcmLabel = new Label();
+        var bcmLabel = new Span();
         bcmLabel.setWidth(20, Unit.PIXELS);
         bcmLabel.getStyle().set("font", "9px Tahoma")
                 .set("text-align", "center");
         bcmHolder.add(bcmLabel);
 
-        var bcmNumber = new Label();
+        var bcmNumber = new Span();
         bcmNumber.setWidth(20, Unit.PIXELS);
         bcmNumber.getStyle().set("font", "16px Tahoma")
                 .set("text-align", "center");
@@ -56,13 +56,13 @@ class PinView extends HorizontalLayout {
         wiringHolder.setMargin(false);
         wiringHolder.setSpacing(false);
 
-        var wiringPiLabel = new Label();
+        var wiringPiLabel = new Span();
         wiringPiLabel.setWidth(20, Unit.PIXELS);
         wiringPiLabel.getStyle().set("font", "9px Tahoma")
                 .set("text-align", "center");
         wiringHolder.add(wiringPiLabel);
 
-        var wiringPiNumber = new Label();
+        var wiringPiNumber = new Span();
         wiringPiNumber.setWidth(20, Unit.PIXELS);
         wiringPiNumber.getStyle().set("font", "16px Tahoma")
                 .set("text-align", "center");
@@ -74,12 +74,9 @@ class PinView extends HorizontalLayout {
         }
 
         // Name and info
-        var name = new Label(pin.getName());
+        var name = new Span(pin.getName());
         name.getStyle().set("font", "12px Tahoma")
                 .set("text-align", "center");
-        /*if (pin.getRemark() != null) {
-            name.setTooltipText(pin.getRemark());
-        }*/
         name.setMinWidth(180, Unit.PIXELS);
         name.setMaxWidth(180, Unit.PIXELS);
 
@@ -89,14 +86,14 @@ class PinView extends HorizontalLayout {
         pinNumberHolder.setMargin(false);
         pinNumberHolder.setSpacing(false);
 
-        var pinNumberLabel = new Label();
+        var pinNumberLabel = new Span();
         pinNumberLabel.setWidth(20, Unit.PIXELS);
         pinNumberLabel.getStyle().set("font", "9px Tahoma")
                 .set("text-align", "center");
         pinNumberLabel.setText("PIN");
         pinNumberHolder.add(pinNumberLabel);
 
-        var pinNumber = new Label();
+        var pinNumber = new Span();
         pinNumber.setWidth(20, Unit.PIXELS);
         pinNumber.getStyle().set("font", "16px Tahoma")
                 .set("text-align", "center");

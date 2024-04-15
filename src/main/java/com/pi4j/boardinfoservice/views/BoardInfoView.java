@@ -44,7 +44,7 @@ public class BoardInfoView extends VerticalLayout {
         listBox.setMinWidth(250, Unit.PIXELS);
         listBox.setHeightFull();
         listBox.setRenderer(new ComponentRenderer<>(board -> {
-            var lbl = new Label(board.getLabel());
+            var lbl = new Span(board.getLabel());
             lbl.setWidthFull();
             return lbl;
         }));
@@ -129,9 +129,9 @@ public class BoardInfoView extends VerticalLayout {
     }
 
     private HorizontalLayout getLabelValue(String label, String value) {
-        var lbl = new Label(label);
+        var lbl = new Span(label);
         lbl.setWidth(250, Unit.PIXELS);
-        var labelValueHolder = new HorizontalLayout(lbl, new Label(value));
+        var labelValueHolder = new HorizontalLayout(lbl, new Span(value));
         labelValueHolder.setMargin(false);
         labelValueHolder.setPadding(false);
         return labelValueHolder;

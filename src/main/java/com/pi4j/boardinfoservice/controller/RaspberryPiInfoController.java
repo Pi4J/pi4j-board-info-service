@@ -33,17 +33,4 @@ public class RaspberryPiInfoController {
         }
         return ResponseEntity.notFound().build();
     }
-
-    /*
-    // Not very useful, this returns a set of Vaadin HTML components that don't render as a table
-    @GetMapping("/header/{name}/html")
-    public ResponseEntity<String> getHeaderView(@PathVariable String name) {
-        var header = raspberryPiInfoService.getRaspberryPiHeaderByName(name);
-        if (header.isPresent()) {
-            var view = new HeaderPinView(header.get());
-            return ResponseEntity.ok().body(view.getElement().getOuterHTML());
-        }
-        return ResponseEntity.notFound().build();
-    }
-    */
 }

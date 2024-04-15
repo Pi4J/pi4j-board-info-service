@@ -1,7 +1,7 @@
 package com.pi4j.boardinfoservice.views.header;
 
 import com.pi4j.boardinfo.definition.HeaderPins;
-import com.pi4j.boardinfo.pin.HeaderPin;
+import com.pi4j.boardinfo.model.HeaderPin;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -18,7 +18,6 @@ public class HeaderPinView extends VerticalLayout {
      * @param headerPins {@link HeaderPins} to be visualized.
      */
     public HeaderPinView(HeaderPins headerPins) {
-        //this.spacing(25);
         var rows = new HorizontalLayout();
         rows.setPadding(false);
         rows.setMargin(false);

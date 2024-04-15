@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0</version>
+        <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -20,9 +20,9 @@
         <java.version>17</java.version>
 
         <!-- Dependencies -->
-        <pi4j.boardinfo.version>0.3.0</pi4j.boardinfo.version>
-        <springdoc.version>2.1.0</springdoc.version>
-        <vaadin.version>24.2.4</vaadin.version>
+        <pi4j.version>2.5.1-SNAPSHOT</pi4j.version>
+        <springdoc.version>2.5.0</springdoc.version>
+        <vaadin.version>24.3.9</vaadin.version>
     </properties>
 
     <dependencies>
@@ -96,8 +96,8 @@
         <!-- Pi4J -->
         <dependency>
             <groupId>com.pi4j</groupId>
-            <artifactId>pi4j-board-info</artifactId>
-            <version>${pi4j.boardinfo.version}</version>
+            <artifactId>pi4j-core</artifactId>
+            <version>${pi4j.version}</version>
         </dependency>
 
         <!-- Testing -->
@@ -236,10 +236,15 @@
             </snapshots>
         </repository>
         <repository>
-            <id>vaadin-prereleases</id>
-            <url>
-                https://maven.vaadin.com/vaadin-prereleases/
-            </url>
+            <id>oss-snapshots-repo</id>
+            <name>Sonatype OSS Maven Repository</name>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
 
         <!-- Repository used by many Vaadin add-ons -->
