@@ -25,13 +25,15 @@ This service provides the following end-points on https://api.pi4j.com:
     * `/api/docs/pi4j`
     * `/swagger-ui/index.html`
 * APIs
+    * Can
+      be [tested on Postman](https://www.postman.com/frankdelportebe/workspace/pi4j-api/collection/34333643-2b15a4b6-9c0d-4b5f-9c4c-375139cad3c5).
     * Service
         * `/api/service/actual`
         * `/api/service/board`
         * `/api/service/memory`
     * Raspberry Pi Info
         * `/api/raspberrypi/board`
-        * `/api/raspberrypi/board/MODEL`
+        * `/api/raspberrypi/board/{MODEL}`
             * e.g. `/api/raspberrypi/board/MODEL_4_B`
 
 ### Build and distribute with GitHub Actions

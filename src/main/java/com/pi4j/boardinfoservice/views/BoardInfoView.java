@@ -95,8 +95,9 @@ public class BoardInfoView extends VerticalLayout {
             holder.add(new H3("Board info"));
 
             holder.add(getLabelValue("Board type", boardModel.getBoardType().name()));
-            holder.add(getLabelValue("Released", boardModel.getReleaseDate().getMonth().getDisplayName(TextStyle.FULL, Locale.UK))
-                    + " " + boardModel.getReleaseDate().getYear());
+            var formattedDate = boardModel.getReleaseDate().getMonth().getDisplayName(TextStyle.FULL, Locale.UK)
+                    + " " + boardModel.getReleaseDate().getYear();
+            holder.add(getLabelValue("Released", formattedDate));
             holder.add(getLabelValue("Model", boardModel.getModel().name()));
             holder.add(getLabelValue("Header version", boardModel.getHeaderVersion().getLabel()));
             holder.add(getLabelValue("Release date", boardModel.getReleaseDate().toString()));
