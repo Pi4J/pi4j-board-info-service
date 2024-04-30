@@ -20,7 +20,7 @@
         <java.version>17</java.version>
 
         <!-- Dependencies -->
-        <pi4j.version>2.5.1-SNAPSHOT</pi4j.version>
+        <pi4j.version>2.6.0</pi4j.version>
         <springdoc.version>2.5.0</springdoc.version>
         <vaadin.version>24.3.9</vaadin.version>
     </properties>
@@ -235,6 +235,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <!--
         <repository>
             <id>oss-snapshots-repo</id>
             <name>Sonatype OSS Maven Repository</name>
@@ -246,6 +247,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        -->
 
         <!-- Repository used by many Vaadin add-ons -->
         <repository>
