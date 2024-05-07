@@ -105,13 +105,19 @@ public class BaseLayout extends AppLayout {
             this.view = view;
             RouterLink link = new RouterLink();
             // Use Lumo classnames for various styling
-            link.addClassNames(LumoUtility.Display.FLEX, LumoUtility.Gap.XSMALL, LumoUtility.Height.MEDIUM, LumoUtility.AlignItems.CENTER, LumoUtility.Padding.Horizontal.SMALL,
+            link.addClassNames(LumoUtility.Display.FLEX,
+                    LumoUtility.Gap.XSMALL,
+                    LumoUtility.Height.MEDIUM,
+                    LumoUtility.AlignItems.CENTER,
+                    LumoUtility.Padding.Horizontal.SMALL,
                     LumoUtility.TextColor.BODY);
             link.setRoute(view);
 
             Span text = new Span(menuTitle);
             // Use Lumo classnames for various styling
-            text.addClassNames(LumoUtility.FontWeight.MEDIUM, LumoUtility.FontSize.MEDIUM, LumoUtility.Whitespace.NOWRAP);
+            text.addClassNames(LumoUtility.FontWeight.MEDIUM,
+                    LumoUtility.FontSize.MEDIUM,
+                    LumoUtility.Whitespace.NOWRAP);
 
             if (icon != null) {
                 link.add(icon);

@@ -12,9 +12,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.router.*;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,12 +26,13 @@ import java.util.stream.Collectors;
 @PageTitle("Raspberry Pi Board Information")
 @Route(value = "board-information", layout = BaseLayout.class)
 @RouteAlias(value = "", layout = BaseLayout.class)
-public class BoardInfoView extends VerticalLayout {
+public class BoardInfoView extends VerticalLayout implements HasUrlParameter<String> {
 
     private static final Logger logger = LogManager.getLogger(BoardInfoView.class);
 
     private final VerticalLayout holder = new VerticalLayout();
     private final ListBox<BoardModel> listBox = new ListBox<>();
+    private BoardModel selectedBoard;
 
     public BoardInfoView() {
         setSpacing(false);
@@ -41,11 +41,11 @@ public class BoardInfoView extends VerticalLayout {
         setJustifyContentMode(JustifyContentMode.START);
 
         listBox.addValueChangeListener(e -> showBoard(e.getValue()));
-        listBox.setMinWidth(250, Unit.PIXELS);
+        listBox.setMinWidth(300, Unit.PIXELS);
         listBox.setHeightFull();
         listBox.setRenderer(new ComponentRenderer<>(board -> {
-            var lbl = new Span(board.getLabel());
-            lbl.setWidthFull();
+            var lbl = new Anchor("/board-information/" + board.getName(), board.getLabel());
+            lbl.addClassNames(LumoUtility.Gap.XSMALL, LumoUtility.TextColor.BODY);
             return lbl;
         }));
 
@@ -61,12 +61,25 @@ public class BoardInfoView extends VerticalLayout {
     }
 
     @Override
+    public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
+        selectedBoard = Arrays.stream(BoardModel.values())
+                .filter(bm -> bm.name().equalsIgnoreCase(parameter == null ? "" : parameter))
+                .findFirst()
+                .orElse(BoardModel.UNKNOWN);
+    }
+
+    @Override
     public void onAttach(AttachEvent event) {
         var listWithoutUnknown = Arrays.stream(BoardModel.values())
                 .filter(bm -> bm != BoardModel.UNKNOWN)
                 .sorted(Comparator.comparing(BoardModel::getLabel))
                 .toList();
-        UI.getCurrent().access(() -> listBox.setItems(listWithoutUnknown));
+        UI.getCurrent().access(() -> {
+            listBox.setItems(listWithoutUnknown);
+            if (selectedBoard != BoardModel.UNKNOWN) {
+                listBox.setValue(selectedBoard);
+            }
+        });
     }
 
     private void showBoard(BoardModel boardModel) {
