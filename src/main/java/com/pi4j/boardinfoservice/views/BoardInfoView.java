@@ -7,13 +7,12 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
-import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.*;
-import com.vaadin.flow.theme.lumo.LumoUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,7 +30,7 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
     private static final Logger logger = LogManager.getLogger(BoardInfoView.class);
 
     private final VerticalLayout holder = new VerticalLayout();
-    private final ListBox<BoardModel> listBox = new ListBox<>();
+    private final SideNav items = new SideNav();
     private BoardModel selectedBoard;
 
     public BoardInfoView() {
@@ -45,20 +44,13 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
                 new Anchor("https://pi4j.com/documentation/board-info", "board info", AnchorTarget.BLANK),
                 new Span(" provided by the Pi4J library.")));
 
-        listBox.addValueChangeListener(e -> showBoard(e.getValue()));
-        listBox.setMinWidth(300, Unit.PIXELS);
-        listBox.setHeightFull();
-        listBox.setRenderer(new ComponentRenderer<>(board -> {
-            var lbl = new Anchor("/board-information/" + board.getName(), board.getLabel());
-            lbl.addClassNames(LumoUtility.Gap.XSMALL, LumoUtility.TextColor.BODY);
-            return lbl;
-        }));
-
         holder.setPadding(true);
         holder.setMargin(false);
         holder.setSpacing(true);
 
-        var split = new SplitLayout(listBox, holder);
+        items.setMinWidth(250, Unit.PIXELS);
+
+        var split = new SplitLayout(items, holder);
         split.setHeightFull();
         split.setWidthFull();
 
@@ -71,6 +63,9 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
                 .filter(bm -> bm.name().equalsIgnoreCase(parameter == null ? "" : parameter))
                 .findFirst()
                 .orElse(BoardModel.UNKNOWN);
+        UI.getCurrent().access(() -> {
+            showBoard(selectedBoard);
+        });
     }
 
     @Override
@@ -80,9 +75,12 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
                 .sorted(Comparator.comparing(BoardModel::getLabel))
                 .toList();
         UI.getCurrent().access(() -> {
-            listBox.setItems(listWithoutUnknown);
-            if (selectedBoard != BoardModel.UNKNOWN) {
-                listBox.setValue(selectedBoard);
+            for (BoardModel boardModel : listWithoutUnknown) {
+                var item = new SideNavItem(boardModel.getLabel(), "/board-information/" + boardModel.getName());
+                items.addItem(item);
+                if (boardModel == selectedBoard) {
+                    showBoard(boardModel);
+                }
             }
         });
     }
@@ -90,7 +88,7 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
     private void showBoard(BoardModel boardModel) {
         holder.removeAll();
 
-        if (boardModel == null) {
+        if (boardModel == null || boardModel == BoardModel.UNKNOWN) {
             return;
         }
 

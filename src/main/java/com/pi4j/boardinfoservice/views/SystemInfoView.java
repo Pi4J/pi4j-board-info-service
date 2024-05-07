@@ -53,8 +53,6 @@ public class SystemInfoView extends VerticalLayout {
         add(grid);
 
         setSizeFull();
-        //setJustifyContentMode(JustifyContentMode.LEF);
-        //setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
     }
 
