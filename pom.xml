@@ -22,7 +22,7 @@
         <!-- Dependencies -->
         <pi4j.version>2.6.0</pi4j.version>
         <springdoc.version>2.5.0</springdoc.version>
-        <vaadin.version>24.3.9</vaadin.version>
+        <vaadin.version>24.3.10</vaadin.version>
     </properties>
 
     <dependencies>
