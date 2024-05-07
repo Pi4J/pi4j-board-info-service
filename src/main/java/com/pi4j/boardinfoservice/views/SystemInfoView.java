@@ -5,6 +5,10 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.AnchorTarget;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -25,6 +29,11 @@ public class SystemInfoView extends VerticalLayout {
 
         setSpacing(false);
 
+        add(new Paragraph(
+                new Span("Information about the Raspberry Pi board that runs this webservice. This info is returned by the "),
+                new Anchor("https://github.com/Pi4J/pi4j-v2/blob/develop/pi4j-core/src/main/java/com/pi4j/boardinfo/util/BoardInfoHelper.java", "BoardInfoHelper", AnchorTarget.BLANK),
+                new Span(", which is available in the Pi4J Core library.")));
+
         Grid<InfoLine> grid = new Grid<>(InfoLine.class, false);
         grid.addColumn(InfoLine::type)
                 .setHeader("Type")
@@ -44,8 +53,8 @@ public class SystemInfoView extends VerticalLayout {
         add(grid);
 
         setSizeFull();
-        setJustifyContentMode(JustifyContentMode.CENTER);
-        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+        //setJustifyContentMode(JustifyContentMode.LEF);
+        //setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
     }
 

@@ -40,6 +40,11 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.START);
 
+        add(new Paragraph(
+                new Span("Information about all the Raspberry Pi boards. This info is based on the "),
+                new Anchor("https://pi4j.com/documentation/board-info", "board info", AnchorTarget.BLANK),
+                new Span(" provided by the Pi4J library.")));
+
         listBox.addValueChangeListener(e -> showBoard(e.getValue()));
         listBox.setMinWidth(300, Unit.PIXELS);
         listBox.setHeightFull();
