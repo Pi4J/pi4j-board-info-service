@@ -1,6 +1,6 @@
 # Running the service
 
-The service runs on a Raspberry Pi provided by Finaltek.com.
+The service runs on a Raspberry Pi provided by Finaltek.com, DNS can be managed by Robert and Frank.
 
 ## Prepare Raspberry Pi
 
@@ -53,3 +53,13 @@ sudo systemctl enable pi4j_board_info.service
 sudo systemctl start pi4j_board_info.service
 sudo systemctl status pi4j_board_info.service
 ```
+
+## NGINX and HTTPS
+
+The service is now available on http://api.pi4j.com:8080/, to make it available via HTTPS:
+
+* https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-debian-11
+* https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-debian-11
+* https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+
+Relevant files: `/etc/nginx/sites-enabled/{api.pi4j.com,default}`
