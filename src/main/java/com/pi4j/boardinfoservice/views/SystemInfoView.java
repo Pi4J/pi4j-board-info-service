@@ -1,6 +1,8 @@
 package com.pi4j.boardinfoservice.views;
 
+import com.pi4j.boardinfoservice.service.Pi4JInfoService;
 import com.pi4j.boardinfoservice.service.SystemInfoService;
+import com.pi4j.common.Descriptor;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
@@ -22,10 +24,13 @@ import java.util.List;
 public class SystemInfoView extends VerticalLayout {
 
     private final SystemInfoService systemInfoService;
+    private final Pi4JInfoService pi4JInfoService;
     private final List<InfoLine> infoList = new ArrayList<>();
 
-    public SystemInfoView(@Autowired SystemInfoService systemInfoService) {
+    public SystemInfoView(@Autowired SystemInfoService systemInfoService,
+                          @Autowired Pi4JInfoService pi4JInfoService) {
         this.systemInfoService = systemInfoService;
+        this.pi4JInfoService = pi4JInfoService;
 
         setSpacing(false);
 
@@ -90,7 +95,18 @@ public class SystemInfoView extends VerticalLayout {
             infoList.add(new InfoLine("Board reading", "Temperature (°F)", reading.getTemperatureInFahrenheit()));
             infoList.add(new InfoLine("Board reading", "Volt", reading.getVolt()));
             infoList.add(new InfoLine("Board reading", "Volt (value)", reading.getVoltValue()));
+
+            var pi4j = pi4JInfoService.getPi4JContext();
+            infoList.add(new InfoLine("Pi4J Context", "Registry", getDescriptor(pi4j.registry().describe())));
+            infoList.add(new InfoLine("Pi4J Context", "Platforms", getDescriptor(pi4j.platforms().describe())));
+            infoList.add(new InfoLine("Pi4J Context", "Providers", getDescriptor(pi4j.providers().describe())));
+            infoList.add(new InfoLine("Pi4J Context", "Properties", getDescriptor(pi4j.properties().describe())));
+
         });
+    }
+
+    private String getDescriptor(Descriptor descriptor) {
+        return descriptor.name() + ", " + descriptor.description();
     }
 
     private record InfoLine(String type, String label, Object info) {
