@@ -106,7 +106,7 @@ public class SystemInfoView extends VerticalLayout {
     }
 
     private String getDescriptor(Descriptor descriptor) {
-        return descriptor.name() + ", " + descriptor.description();
+        return descriptor.category() + ", " + descriptor.name() + ", " + descriptor.quantity() + ", " + descriptor.type();
     }
 
     private record InfoLine(String type, String label, Object info) {
