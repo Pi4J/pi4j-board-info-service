@@ -2,7 +2,7 @@
 <!-- https://howtodoinjava.com/log4j2/log4j2-xml-configuration-example/ -->
 <Configuration status="warn">
     <Properties>
-        <!-- <Property name="basePath">/Users/frankdelporte/tmp/log/</Property> -->
+        <!-- <Property name="basePath">/Users/frank/tmp/log/</Property> -->
         <Property name="basePath">/home/ft/pi4j-board-info-service/logs/</Property>
     </Properties>
 

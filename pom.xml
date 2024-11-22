@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>3.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -20,9 +20,11 @@
         <java.version>17</java.version>
 
         <!-- Dependencies -->
-        <pi4j.version>2.6.0</pi4j.version>
+        <pi4j.version>2.7.0</pi4j.version>
         <springdoc.version>2.5.0</springdoc.version>
-        <vaadin.version>24.3.10</vaadin.version>
+        <vaadin.version>24.5.5</vaadin.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <dependencies>

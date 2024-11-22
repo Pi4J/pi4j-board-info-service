@@ -117,6 +117,7 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
             holder.add(getLabelValue("Model", boardModel.getModel().name()));
             holder.add(getLabelValue("Header version", boardModel.getHeaderVersion().getLabel()));
             holder.add(getLabelValue("Release date", boardModel.getReleaseDate().toString()));
+            holder.add(getLabelValue("Board code(s)", String.join(", ", boardModel.getBoardCodes())));
             holder.add(getLabelValue("SOC", boardModel.getSoc().name()
                     + " / " + boardModel.getSoc().getInstructionSet().getLabel()));
             holder.add(getLabelValue("CPU", boardModel.getNumberOfCpu()
