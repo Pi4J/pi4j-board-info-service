@@ -63,9 +63,7 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
                 .filter(bm -> bm.name().equalsIgnoreCase(parameter == null ? "" : parameter))
                 .findFirst()
                 .orElse(BoardModel.UNKNOWN);
-        UI.getCurrent().access(() -> {
-            showBoard(selectedBoard);
-        });
+        UI.getCurrent().access(() -> showBoard(selectedBoard));
     }
 
     @Override
@@ -130,8 +128,11 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
                     boardModel.getVersionsMemoryInGb().stream()
                             .map(String::valueOf)
                             .collect(Collectors.joining(", "))));
-            holder.add(getLabelValue("Remarks", boardModel.getRemarks().isEmpty() ? "" :
-                    String.join(", ", boardModel.getRemarks())));
+            if (!boardModel.getRemarks().isEmpty()) {
+                var remarks = new VerticalLayout();
+                holder.add(remarks);
+                boardModel.getRemarks().forEach(r -> remarks.add(new Div(r)));
+            }
 
             holder.add(new H3("Header(s)"));
 
