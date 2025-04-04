@@ -128,6 +128,7 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
                     boardModel.getVersionsMemoryInGb().stream()
                             .map(String::valueOf)
                             .collect(Collectors.joining(", "))));
+            holder.add(getLabelValue("Uses RP1", boardModel.usesRP1() ? "Yes" : "No"));
             if (!boardModel.getRemarks().isEmpty()) {
                 var remarks = new VerticalLayout();
                 holder.add(remarks);
