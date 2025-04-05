@@ -4,6 +4,7 @@ import com.pi4j.boardinfo.definition.BoardModel;
 import com.pi4j.boardinfoservice.views.header.HeaderLegend;
 import com.pi4j.boardinfoservice.views.header.HeaderPinView;
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.HtmlContainer;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.*;
@@ -128,7 +129,11 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
                     boardModel.getVersionsMemoryInGb().stream()
                             .map(String::valueOf)
                             .collect(Collectors.joining(", "))));
-            holder.add(getLabelValue("Uses RP1", boardModel.usesRP1() ? "Yes" : "No"));
+            if (boardModel.usesRP1()) {
+                holder.add(getLabelValue("Uses RP1", new Anchor("https://datasheets.raspberrypi.com/rp1/rp1-peripherals.pdf", "Yes, click here for datasheet", AnchorTarget.BLANK)));
+            } else {
+                holder.add(getLabelValue("Uses RP1", "No"));
+            }
             if (!boardModel.getRemarks().isEmpty()) {
                 var remarks = new VerticalLayout();
                 holder.add(remarks);
@@ -152,6 +157,15 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
         var lbl = new Span(label);
         lbl.setWidth(250, Unit.PIXELS);
         var labelValueHolder = new HorizontalLayout(lbl, new Span(value));
+        labelValueHolder.setMargin(false);
+        labelValueHolder.setPadding(false);
+        return labelValueHolder;
+    }
+
+    private HorizontalLayout getLabelValue(String label, HtmlContainer html) {
+        var lbl = new Span(label);
+        lbl.setWidth(250, Unit.PIXELS);
+        var labelValueHolder = new HorizontalLayout(lbl, html);
         labelValueHolder.setMargin(false);
         labelValueHolder.setPadding(false);
         return labelValueHolder;
