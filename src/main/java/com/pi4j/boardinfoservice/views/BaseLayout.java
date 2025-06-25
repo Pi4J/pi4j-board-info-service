@@ -58,7 +58,6 @@ public class BaseLayout extends AppLayout {
 
         // Wrap the links in a list; improves accessibility
         UnorderedList list = new UnorderedList();
-        //list.addClassNames(LumoUtility.Display.FLEX, LumoUtility.Gap.SMALL, LumoUtility.ListStyleType.NONE, LumoUtility.Margin.NONE, LumoUtility.Padding.NONE);
         list.addClassNames(LumoUtility.Gap.SMALL, LumoUtility.ListStyleType.NONE, LumoUtility.Margin.NONE, LumoUtility.Padding.NONE);
         nav.add(list);
 
@@ -72,6 +71,7 @@ public class BaseLayout extends AppLayout {
     private ListItem[] createMenuItems() {
         return new ListItem[]{
                 new MenuItemComponent("Board Information", VaadinIcon.DATABASE.create(), BoardInfoView.class),
+                new MenuItemComponent("Compare Boards", VaadinIcon.TWIN_COL_SELECT.create(), BoardCompareView.class),
                 new MenuItemComponent("System Information", VaadinIcon.INFO.create(), SystemInfoView.class),
                 new MenuItemComponent("Thanks to...", VaadinIcon.HANDS_UP.create(), ThanksView.class),
                 new MenuItemExternalLink("Open API", VaadinIcon.GLOBE.create(), "https://api.pi4j.com/api/docs/pi4j"),
