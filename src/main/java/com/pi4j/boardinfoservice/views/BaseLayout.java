@@ -71,6 +71,7 @@ public class BaseLayout extends AppLayout {
     private ListItem[] createMenuItems() {
         return new ListItem[]{
                 new MenuItemComponent("Board Information", VaadinIcon.DATABASE.create(), BoardInfoView.class),
+                new MenuItemComponent("Find Your Board", VaadinIcon.SEARCH.create(), BoardSearchView.class),
                 new MenuItemComponent("Compare Boards", VaadinIcon.TWIN_COL_SELECT.create(), BoardCompareView.class),
                 new MenuItemComponent("System Information", VaadinIcon.INFO.create(), SystemInfoView.class),
                 new MenuItemComponent("Thanks to...", VaadinIcon.HANDS_UP.create(), ThanksView.class),
