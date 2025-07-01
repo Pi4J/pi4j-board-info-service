@@ -10,20 +10,17 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.format.TextStyle;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @PageTitle("Search Raspberry Pi Board")
 @Route(value = "board-search", layout = BaseLayout.class)
-public class BoardSearchView extends VerticalLayout {
+public class BoardSearchView extends VerticalLayout implements HasUrlParameter<String>, BeforeEnterObserver {
 
     private static final Logger logger = LogManager.getLogger(BoardSearchView.class);
 
@@ -73,6 +70,23 @@ public class BoardSearchView extends VerticalLayout {
         add(holder);
     }
 
+    @Override
+    public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
+        // This method is called for the main route parameter, but we'll use query parameters instead
+
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        Map<String, List<String>> parameters = event.getLocation().getQueryParameters().getParameters();
+        if (parameters != null
+                && parameters.containsKey("code")
+                && parameters.get("code").getFirst() != null
+                && !parameters.get("code").getFirst().isEmpty()) {
+            UI.getCurrent().access(() -> showBoard(parameters.get("code").getFirst(), findBoardByCode(parameters.get("code").getFirst())));
+        }
+    }
+
     /**
      * Finds a board model by board code.
      *
@@ -103,6 +117,15 @@ public class BoardSearchView extends VerticalLayout {
         }
 
         logger.info("Board selected: {}", boardModel.name());
+
+        // Update page URL without triggering navigation
+        Map<String, String> params = new HashMap<>();
+        params.put("code", searchValue.trim());
+        String queryString = params.entrySet().stream()
+                .map(entry -> entry.getKey() + "=" + entry.getValue())
+                .collect(Collectors.joining("&"));
+        String newUrl = "board-search" + (queryString.isEmpty() ? "" : "?" + queryString);
+        UI.getCurrent().getPage().getHistory().replaceState(null, newUrl);
 
         // Use access to prevent long-running load board on top of the screen
         UI.getCurrent().access(() -> {
