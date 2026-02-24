@@ -1,9 +1,10 @@
 package com.pi4j.boardinfoservice;
 
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
-import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +21,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @PWA(name = "My App", shortName = "My App", offlineResources = {})
 @NpmPackage(value = "line-awesome", version = "1.3.0")
 @NpmPackage(value = "@vaadin-component-factory/vcf-nav", version = "1.0.6")
+@StyleSheet(Lumo.STYLESHEET)
+@StyleSheet(Lumo.UTILITY_STYLESHEET)
 public class Pi4JBoardInfoServiceApplication extends SpringBootServletInitializer implements AppShellConfigurator {
 
     private static final Logger logger = LoggerFactory.getLogger(Pi4JBoardInfoServiceApplication.class);
