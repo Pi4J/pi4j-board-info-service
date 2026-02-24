@@ -2,7 +2,7 @@ package com.pi4j.boardinfoservice.service;
 
 import com.pi4j.Pi4J;
 import com.pi4j.boardinfo.definition.BoardModel;
-import com.pi4j.boardinfo.definition.HeaderPins;
+import com.pi4j.boardinfo.definition.HeaderType;
 import com.pi4j.boardinfo.util.BoardInfoHelper;
 import com.pi4j.context.Context;
 import org.apache.logging.log4j.LogManager;
@@ -48,8 +48,8 @@ public class Pi4JInfoService {
                 .findFirst();
     }
 
-    public Optional<HeaderPins> getRaspberryPiHeaderByName(String name) {
-        return Arrays.stream(HeaderPins.values())
+    public Optional<HeaderType> getRaspberryPiHeaderByName(String name) {
+        return Arrays.stream(HeaderType.values())
                 .filter(b -> b.name().equalsIgnoreCase(name))
                 .findFirst();
     }

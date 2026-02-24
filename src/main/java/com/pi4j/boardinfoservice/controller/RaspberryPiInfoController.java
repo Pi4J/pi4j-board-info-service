@@ -39,7 +39,7 @@ public class RaspberryPiInfoController {
         module.addSerializer(BoardModel.class, new BoardModelSerializer());
         module.addSerializer(HeaderVersion.class, new HeaderVersionSerializer());
         module.addSerializer(PiModel.class, new PiModelSerializer());
-        module.addSerializer(HeaderPins.class, new HeaderPinsSerializer());
+        module.addSerializer(HeaderType.class, new HeaderTypeSerializer());
         module.addSerializer(HeaderPin.class, new HeaderPinSerializer());
         module.addSerializer(Soc.class, new SocSerializer());
         module.addSerializer(Cpu.class, new CpuSerializer());
@@ -138,7 +138,7 @@ public class RaspberryPiInfoController {
             gen.writeStringField("label", value.getLabel());
             gen.writeStringField("description", value.getDescription());
             gen.writeArrayFieldStart("headers");
-            for (HeaderPins header : value.getHeaderPins()) {
+            for (HeaderType header : value.getHeaderTypes()) {
                 gen.writeObject(header);
             }
             gen.writeEndArray();
@@ -161,9 +161,9 @@ public class RaspberryPiInfoController {
         }
     }
 
-    static class HeaderPinsSerializer extends JsonSerializer<HeaderPins> {
+    static class HeaderTypeSerializer extends JsonSerializer<HeaderType> {
         @Override
-        public void serialize(HeaderPins value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        public void serialize(HeaderType value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
             gen.writeStartObject();
             gen.writeStringField("name", value.name());
             gen.writeStringField("label", value.getLabel());

@@ -176,9 +176,9 @@ public class BoardSearchView extends VerticalLayout implements HasUrlParameter<S
 
             holder.add(new H3("Header(s)"));
 
-            if (boardModel.getHeaderVersion().getHeaderPins() != null
-                    && !boardModel.getHeaderVersion().getHeaderPins().isEmpty()) {
-                boardModel.getHeaderVersion().getHeaderPins().forEach(hp -> {
+            if (boardModel.getHeaderVersion().getHeaderTypes() != null
+                    && !boardModel.getHeaderVersion().getHeaderTypes().isEmpty()) {
+                boardModel.getHeaderVersion().getHeaderTypes().forEach(hp -> {
                     holder.add(new H4(hp.getLabel()));
                     holder.add(new HeaderPinView(hp));
                 });

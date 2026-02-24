@@ -1,6 +1,6 @@
 package com.pi4j.boardinfoservice.views.header;
 
-import com.pi4j.boardinfo.definition.HeaderPins;
+import com.pi4j.boardinfo.definition.HeaderType;
 import com.pi4j.boardinfo.model.HeaderPin;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,15 +15,15 @@ public class HeaderPinView extends VerticalLayout {
     /**
      * Constructor to create the pin visualization of the header.
      *
-     * @param headerPins {@link HeaderPins} to be visualized.
+     * @param headerType {@link HeaderType} to be visualized.
      */
-    public HeaderPinView(HeaderPins headerPins) {
+    public HeaderPinView(HeaderType headerType) {
         var rows = new HorizontalLayout();
         rows.setPadding(false);
         rows.setMargin(false);
         rows.setSpacing(true);
-        rows.add(this.getRow(headerPins.getPins(), true));
-        rows.add(this.getRow(headerPins.getPins(), false));
+        rows.add(this.getRow(headerType.getPins(), true));
+        rows.add(this.getRow(headerType.getPins(), false));
         this.setPadding(false);
         this.setMargin(false);
         this.setSpacing(false);

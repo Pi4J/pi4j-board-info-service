@@ -1,6 +1,6 @@
 package com.pi4j.boardinfoservice.views;
 
-import com.pi4j.boardinfo.definition.HeaderPins;
+import com.pi4j.boardinfo.definition.HeaderType;
 import com.pi4j.boardinfoservice.views.header.HeaderPinView;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Route(value = "header")
 public class HeaderView extends VerticalLayout implements HasUrlParameter<String> {
 
-    private Optional<HeaderPins> headerPins = Optional.empty();
+    private Optional<HeaderType> headerType = Optional.empty();
 
     public HeaderView() {
         setSpacing(false);
@@ -28,9 +28,9 @@ public class HeaderView extends VerticalLayout implements HasUrlParameter<String
         if (parametersMap.isEmpty()) {
             return;
         }
-        headerPins = Arrays.stream(HeaderPins.values())
+        headerType = Arrays.stream(HeaderType.values())
                 .filter(b -> b.name().equalsIgnoreCase(parametersMap.get("name").get(0)))
                 .findFirst();
-        headerPins.ifPresent(pins -> this.add(new HeaderPinView(pins)));
+        headerType.ifPresent(pins -> this.add(new HeaderPinView(pins)));
     }
 }
