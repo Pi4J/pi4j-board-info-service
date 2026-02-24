@@ -40,7 +40,7 @@ public class SystemInfoView extends VerticalLayout {
                 new Span(", which is available in the Pi4J Core library.")));
 
         Grid<InfoLine> grid = new Grid<>(InfoLine.class, false);
-        grid.addColumn(InfoLine::type)
+        grid.addColumn(il -> il.type().label())
                 .setHeader("Type")
                 .setWidth("200px")
                 .setFlexGrow(0)
@@ -65,42 +65,43 @@ public class SystemInfoView extends VerticalLayout {
     public void onAttach(AttachEvent event) {
         UI.getCurrent().access(() -> {
             var board = systemInfoService.getDetectedBoard();
-            infoList.add(new InfoLine("Board", "Name", board.getBoardModel().getName()));
-            infoList.add(new InfoLine("Board", "Description", board.getBoardModel().getLabel()));
-            infoList.add(new InfoLine("Board", "Model", board.getBoardModel().getModel().getLabel()));
-            infoList.add(new InfoLine("Board", "SOC", board.getBoardModel().getSoc()));
-            infoList.add(new InfoLine("Board", "CPU", board.getBoardModel().getCpu()));
-            infoList.add(new InfoLine("Board", "Codes", String.join(", ", board.getBoardModel().getBoardCodes())));
-            infoList.add(new InfoLine("Operating System", "Name", board.getOperatingSystem().getName()));
-            infoList.add(new InfoLine("Operating System", "Architecture", board.getOperatingSystem().getArchitecture()));
-            infoList.add(new InfoLine("Operating System", "Version", board.getOperatingSystem().getVersion()));
-            infoList.add(new InfoLine("Java", "Version", board.getJavaInfo().getVersion()));
-            infoList.add(new InfoLine("Java", "Runtime", board.getJavaInfo().getRuntime()));
-            infoList.add(new InfoLine("Java", "Vendor", board.getJavaInfo().getVendor()));
-            infoList.add(new InfoLine("Java", "Vendor Version", board.getJavaInfo().getVendorVersion()));
+            infoList.add(new InfoLine(InfoLineType.BOARD, "Name", board.getBoardModel().getName()));
+            infoList.add(new InfoLine(InfoLineType.BOARD, "Description", board.getBoardModel().getLabel()));
+            infoList.add(new InfoLine(InfoLineType.BOARD, "Model", board.getBoardModel().getModel().getLabel()));
+            infoList.add(new InfoLine(InfoLineType.BOARD, "SOC", board.getBoardModel().getSoc()));
+            infoList.add(new InfoLine(InfoLineType.BOARD, "CPU", board.getBoardModel().getCpu()));
+            infoList.add(new InfoLine(InfoLineType.BOARD, "Codes", String.join(", ", board.getBoardModel().getBoardCodes())));
+            infoList.add(new InfoLine(InfoLineType.OS, "Name", board.getOperatingSystem().getName()));
+            infoList.add(new InfoLine(InfoLineType.OS, "Architecture", board.getOperatingSystem().getArchitecture()));
+            infoList.add(new InfoLine(InfoLineType.OS, "Version", board.getOperatingSystem().getVersion()));
+            infoList.add(new InfoLine(InfoLineType.JAVA, "Version", board.getJavaInfo().getVersion()));
+            infoList.add(new InfoLine(InfoLineType.JAVA, "Runtime", board.getJavaInfo().getRuntime()));
+            infoList.add(new InfoLine(InfoLineType.JAVA, "Vendor", board.getJavaInfo().getVendor()));
+            infoList.add(new InfoLine(InfoLineType.JAVA, "Vendor Version", board.getJavaInfo().getVendorVersion()));
 
             var memory = systemInfoService.getJvmMemory();
-            infoList.add(new InfoLine("JVM Memory", "Free (MB)", memory.getFreeInMb()));
-            infoList.add(new InfoLine("JVM Memory", "Max (MB)", memory.getMaxInMb()));
-            infoList.add(new InfoLine("JVM Memory", "Total (MB)", memory.getTotalInMb()));
-            infoList.add(new InfoLine("JVM Memory", "Used (MB)", memory.getUsedInMb()));
+            infoList.add(new InfoLine(InfoLineType.JVM_MEMORY, "Free (MB)", memory.getFreeInMb()));
+            infoList.add(new InfoLine(InfoLineType.JVM_MEMORY, "Max (MB)", memory.getMaxInMb()));
+            infoList.add(new InfoLine(InfoLineType.JVM_MEMORY, "Total (MB)", memory.getTotalInMb()));
+            infoList.add(new InfoLine(InfoLineType.JVM_MEMORY, "Used (MB)", memory.getUsedInMb()));
 
             var reading = systemInfoService.getBoardReading();
-            infoList.add(new InfoLine("Board reading", "Board code", reading.getBoardCode()));
-            infoList.add(new InfoLine("Board reading", "Board version code", reading.getBoardVersionCode()));
-            infoList.add(new InfoLine("Board reading", "Uptime", reading.getUptimeInfo()));
-            infoList.add(new InfoLine("Board reading", "Memory", reading.getMemory()));
-            infoList.add(new InfoLine("Board reading", "Temperature", reading.getTemperature()));
-            infoList.add(new InfoLine("Board reading", "Temperature (°C)", reading.getTemperatureInCelsius()));
-            infoList.add(new InfoLine("Board reading", "Temperature (°F)", reading.getTemperatureInFahrenheit()));
-            infoList.add(new InfoLine("Board reading", "Volt", reading.getVolt()));
-            infoList.add(new InfoLine("Board reading", "Volt (value)", reading.getVoltValue()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Board code", reading.getBoardCode()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Board version code", reading.getBoardVersionCode()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Uptime", reading.getUptimeInfo()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Memory", reading.getMemory()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature", reading.getTemperature()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature (°C)", reading.getTemperatureInCelsius()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature (°F)", reading.getTemperatureInFahrenheit()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Volt", reading.getVolt()));
+            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Volt (value)", reading.getVoltValue()));
 
             var pi4j = pi4JInfoService.getPi4JContext();
-            infoList.add(new InfoLine("Pi4J Context", "Registry", getDescriptor(pi4j.registry().describe())));
-            infoList.add(new InfoLine("Pi4J Context", "Platforms", getDescriptor(pi4j.platforms().describe())));
-            infoList.add(new InfoLine("Pi4J Context", "Providers", getDescriptor(pi4j.providers().describe())));
-            infoList.add(new InfoLine("Pi4J Context", "Properties", getDescriptor(pi4j.properties().describe())));
+
+            infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Registry", getDescriptor(pi4j.registry().describe())));
+            infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Platforms", getDescriptor(pi4j.platforms().describe())));
+            infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Providers", getDescriptor(pi4j.providers().describe())));
+            infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Properties", getDescriptor(pi4j.properties().describe())));
 
         });
     }
@@ -109,6 +110,25 @@ public class SystemInfoView extends VerticalLayout {
         return descriptor.category() + ", " + descriptor.name() + ", " + descriptor.quantity() + ", " + descriptor.type();
     }
 
-    private record InfoLine(String type, String label, Object info) {
+    private enum InfoLineType {
+        BOARD("Board"),
+        OS("Operating System"),
+        JAVA("Java"),
+        JVM_MEMORY("JVM Memory"),
+        BOARD_READING("Board Reading"),
+        PI4J_CONTEXT("Pi4J Context");
+
+        private final String label;
+
+        InfoLineType(String label) {
+            this.label = label;
+        }
+
+        public String label() {
+            return label;
+        }
+    }
+
+    private record InfoLine(InfoLineType type, String label, Object info) {
     }
 }

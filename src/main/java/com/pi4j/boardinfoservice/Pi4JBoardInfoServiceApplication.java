@@ -25,7 +25,7 @@ public class Pi4JBoardInfoServiceApplication extends SpringBootServletInitialize
 
     private static final Logger logger = LoggerFactory.getLogger(Pi4JBoardInfoServiceApplication.class);
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(Pi4JBoardInfoServiceApplication.class, args);
         logger.info("Service is up-and-running");
     }
