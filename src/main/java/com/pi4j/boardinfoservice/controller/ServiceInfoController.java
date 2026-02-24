@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/service")
 public class ServiceInfoController {
@@ -29,7 +31,7 @@ public class ServiceInfoController {
     }
 
     @GetMapping("/actual")
-    public BoardReading getBoardReadings() {
+    public Optional<BoardReading> getBoardReadings() {
         return systemInfoService.getBoardReading();
     }
 }

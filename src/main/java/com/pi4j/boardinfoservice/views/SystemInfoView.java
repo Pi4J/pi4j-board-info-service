@@ -85,24 +85,25 @@ public class SystemInfoView extends VerticalLayout {
             infoList.add(new InfoLine(InfoLineType.JVM_MEMORY, "Total (MB)", memory.getTotalInMb()));
             infoList.add(new InfoLine(InfoLineType.JVM_MEMORY, "Used (MB)", memory.getUsedInMb()));
 
-            var reading = systemInfoService.getBoardReading();
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Board code", reading.getBoardCode()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Board version code", reading.getBoardVersionCode()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Uptime", reading.getUptimeInfo()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Memory", reading.getMemory()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature", reading.getTemperature()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature (°C)", reading.getTemperatureInCelsius()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature (°F)", reading.getTemperatureInFahrenheit()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Volt", reading.getVolt()));
-            infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Volt (value)", reading.getVoltValue()));
+            var readingIfAvailable = systemInfoService.getBoardReading();
+            if (readingIfAvailable.isPresent()) {
+                var reading = readingIfAvailable.get();
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Board code", reading.getBoardCode()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Board version code", reading.getBoardVersionCode()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Uptime", reading.getUptimeInfo()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Memory", reading.getMemory()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature", reading.getTemperature()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature (°C)", reading.getTemperatureInCelsius()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Temperature (°F)", reading.getTemperatureInFahrenheit()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Volt", reading.getVolt()));
+                infoList.add(new InfoLine(InfoLineType.BOARD_READING, "Volt (value)", reading.getVoltValue()));
+            }
 
             var pi4j = pi4JInfoService.getPi4JContext();
-
             infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Registry", getDescriptor(pi4j.registry().describe())));
             infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Platforms", getDescriptor(pi4j.platforms().describe())));
             infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Providers", getDescriptor(pi4j.providers().describe())));
             infoList.add(new InfoLine(InfoLineType.PI4J_CONTEXT, "Properties", getDescriptor(pi4j.properties().describe())));
-
         });
     }
 
