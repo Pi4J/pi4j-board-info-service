@@ -50,9 +50,7 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
         holder.setMargin(false);
         holder.setSpacing(true);
 
-        items.setMinWidth(250, Unit.PIXELS);
-
-        var split = new SplitLayout(new Scroller(items), holder);
+        var split = new SplitLayout(new Scroller(items), new Scroller(holder));
         split.setHeightFull();
         split.setWidthFull();
 
