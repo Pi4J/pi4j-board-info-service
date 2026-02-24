@@ -9,6 +9,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
@@ -51,7 +52,7 @@ public class BoardInfoView extends VerticalLayout implements HasUrlParameter<Str
 
         items.setMinWidth(250, Unit.PIXELS);
 
-        var split = new SplitLayout(items, holder);
+        var split = new SplitLayout(new Scroller(items), holder);
         split.setHeightFull();
         split.setWidthFull();
 

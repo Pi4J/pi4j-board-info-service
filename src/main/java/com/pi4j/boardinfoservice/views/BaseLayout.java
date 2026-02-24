@@ -7,6 +7,7 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.dom.Style;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
@@ -43,7 +44,7 @@ public class BaseLayout extends AppLayout {
         logo.getStyle().set("padding", "25px 0 0 50px");
 
         H2 appName = new H2("Pi4J API");
-        appName.addClassNames("app-name");
+        appName.getStyle().setTextAlign(Style.TextAlign.CENTER);
 
         com.vaadin.flow.component.html.Section section = new com.vaadin.flow.component.html.Section(logo,
                 appName, createNavigation(), createFooter());
