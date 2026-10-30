@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.9</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -95,6 +95,12 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dev</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Needed by the shaded Kotlin classes in vaadin-dev's Copilot jar during classpath scanning -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
             <optional>true</optional>
         </dependency>
 
